@@ -1,0 +1,2 @@
+\\SERVERNAME\C$\Logs
+\\SERVERNAME\C$\TempLogs
