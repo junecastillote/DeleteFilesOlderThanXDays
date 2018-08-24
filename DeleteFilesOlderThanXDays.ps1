@@ -1,5 +1,5 @@
 $scriptVersion = "1.0"
-#http://shaking-off-the-cobwebs.blogspot.com/2016/09/DeleteFilesOlderThanXDays.html
+#http://www.lazyexchangeadmin.com/2016/09/DeleteFilesOlderThanXDays.html
 #Region Variables
 	$today = '{0:dd/MMM/yyyy hh:mm tt}' -f (Get-Date)
 	$script_root = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
@@ -27,7 +27,7 @@ foreach ($dirPath in $DirList) {
 		
 		Write-Host "Delete $($logFile.FullName)" -ForegroundColor Green
 		$debugLog += ($logFile.FullName)
-		Remove-Item -Path ($logFile.FullName) -Force
+		Remove-Item -Path ($logFile.FullName) -Force -ErrorAction SilentlyContinue
 		}
 	}	
 }
