@@ -8,7 +8,6 @@ $scriptVersion = "1.1"
 	$debugLogFile = ($script_root + "\DeleteLog.txt")
 	$DirList = get-content ($script_root + "\DirList.txt")
 	$deleteLogCSVFile = ($script_root + "\DeleteLog.csv")
-	
 	#Change this value to your preferred number of days (in negative)
 	$HowManyDaysOld = "-0"
 	#Change boolean value to whether you want to receive an email report or not
@@ -20,7 +19,7 @@ $resultLog = @()
 foreach ($dirPath in $DirList) {
 
 	#Write-Host $dirPath -ForegroundColor Green
-	$logFiles = Get-ChildItem $dirPath #| Where-Object { $_.LastWriteTime -lt $DatetoDelete }
+	$logFiles = Get-ChildItem $dirPath -File | Where-Object { $_.LastWriteTime -lt $DatetoDelete }
 	
 	if (($logFiles.Count) -gt 0) {
 	
@@ -32,7 +31,7 @@ foreach ($dirPath in $DirList) {
 
 		try {
 			Write-Host "Delete $($logFile.FullName).. " -ForegroundColor Green -NoNewline
-			Remove-Item -Path ($logFile.FullName) -ErrorAction Stop
+			Remove-Item -Path ($logFile.FullName) -Force -Confirm:$false -ErrorAction Stop
 			$temp.Successful = $true
 			Write-Host "Success" -ForegroundColor Green
 		}
@@ -40,10 +39,8 @@ foreach ($dirPath in $DirList) {
 			Write-Host "Failed" -ForegroundColor Red
 			$temp.Successful = $false
 		}
-		#Remove-Item -Path ($logFile.FullName) -Force -ErrorAction SilentlyContinue
-		$resultLog += $temp
+			$resultLog += $temp
 		}
-
 	}	
 }
 $resultLog | Export-Csv -NoTypeInformation $deleteLogCSVFile
