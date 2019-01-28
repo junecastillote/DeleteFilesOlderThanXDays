@@ -1,2 +1,4 @@
-\\SERVERNAME\C$\Logs
-\\SERVERNAME\C$\TempLogs
+C:\inetpub\logs\LogFiles\
+C:\Program Files\Microsoft\Exchange Server\V15\Logging\
+C:\Program Files\Microsoft\Exchange Server\V15\Bin\Search\Ceres\Diagnostics\ETLTraces\
+C:\Program Files\Microsoft\Exchange Server\V15\Bin\Search\Ceres\Diagnostics\Logs
